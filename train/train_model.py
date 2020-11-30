@@ -255,3 +255,7 @@ def run_train_model(abs_path, path, seed):
 
 
 # ------------------------------------------------------------------------------
+
+
+if __name__ == "__main__":
+    y_pred = run_train_model(abs_path, path, seed)
