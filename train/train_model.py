@@ -91,3 +91,25 @@ class StopWords(BaseEstimator, TransformerMixin):
         ))
         return X
 
+
+class Stemming(BaseEstimator, TransformerMixin):
+    """Reduce inflection in words to their root forms
+    Attributes:
+        X (pd.Series): Column with text
+    Methods:
+        fit (X): Pass
+        transform (X): Convert all words from X to the root form 
+    """
+
+    def fit(self, X: pd.Series, y=None):
+        return self
+
+    def transform(self, X: pd.Series):
+        # Lemmatization/Stemming
+        porter_stemmer = nltk.PorterStemmer()
+        X = X.apply(lambda x: ' '.join(
+            [porter_stemmer.stem(words) for words in x.split()]
+        ))
+        return X
+
+
