@@ -2,7 +2,7 @@
 import os
 import sys
 # Train model
-from train.model_train import run_train_model
+from train.train_model import run_train_model
 
 # Seed
 seed = 42
