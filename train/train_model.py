@@ -171,3 +171,16 @@ pipeline = Pipeline([
 ])
 
 
+# Based on the blogger notebook select only xgb
+param_grid = {
+    'scaler': ['passthrough', #StandardScaler()
+        ],
+    'decomposer': ['passthrough', #TruncatedSVD()
+        ],
+    'classifier': [
+                # OneVsRestClassifier(LogisticRegression()),
+                # OneVsRestClassifier(RandomForestClassifier()),
+                # OneVsRestClassifier(SVC()),
+                OneVsRestClassifier(xgb.XGBClassifier())]
+}
+
