@@ -14,7 +14,7 @@ Each blog in the corpus includes at least 200 occurrences of common English word
 Python version: 3.7      
 You can set up virtual environment in one-step by using:
 ```
-> conda conda env create -f environment.yml
+> conda env create -f environment.yml
 ```
 
 ## File Structure
