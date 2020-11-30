@@ -184,3 +184,30 @@ param_grid = {
                 OneVsRestClassifier(xgb.XGBClassifier())]
 }
 
+
+class ClassificationModel():
+    def __init__(self, pipeline, scoring, parameters):
+        self.pipeline = pipeline
+        self.scoring = scoring
+        self.parameters = parameters
+
+    def grid_search(self):
+        # Run GridSearchCV
+        search = GridSearchCV(
+            estimator=self.pipeline,
+            param_grid=self.parameters,
+            scoring=self.scoring,
+            refit="f1",
+            n_jobs=-1,
+            cv=5)
+        return search
+
+    def model_fit(self, X_train, y_train):
+        search = self.grid_search()
+        # Fit model
+        print('Training in progress.. please wait.')
+        model_fit = search.fit(X_train, y_train)
+        # Print best parameters
+        print(f'Best model parameters:\n{model_fit.best_params_}')
+        return model_fit
+
