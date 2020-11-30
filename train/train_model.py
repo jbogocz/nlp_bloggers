@@ -69,3 +69,25 @@ class RemoveNonalpha(BaseEstimator, TransformerMixin):
         # Remove all non-alphabet chars from string
         X = X.apply(lambda x: re.sub(pattern, ' ', x.lower().strip()))
         return X
+
+
+class StopWords(BaseEstimator, TransformerMixin):
+    """Remove all english stop words from text
+    Attributes:
+        X (pd.Series): Column with text
+    Methods:
+        fit(X): Pass
+        transform (X): Remove stop words from X
+    """
+
+    def fit(self, X: pd.Series, y=None):
+        return self
+
+    def transform(self, X: pd.Series):
+        # Remove all stop words, punctuation
+        stop_words = set(stopwords.words('english'))
+        X = X.apply(lambda x: ' '.join(
+            [words for words in x.split() if words not in stop_words]
+        ))
+        return X
+
