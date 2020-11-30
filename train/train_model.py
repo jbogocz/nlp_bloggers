@@ -224,3 +224,34 @@ def print_scores(y_test, y_pred):
 
 # ------------------------------------------------------------------------------
 
+
+def run_train_model(abs_path, path, seed):
+    df = data_info(path)
+    prep_X_y = Prepare_X_Y(df)
+    X = prep_X_y.get_X()
+    y = prep_X_y.binarize_y()
+    # Train test split
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y,
+        test_size=.2,
+        random_state=seed,
+    )
+    print(f'Train: {len(X_train)}, Test: {len(X_test)}')
+
+    cls_model = ClassificationModel(
+        pipeline=pipeline,
+        scoring=scoring,
+        parameters=param_grid
+    )
+    model_fit = cls_model.model_fit(X_train, y_train)
+    # Save model
+    joblib_path = os.path.join(abs_path, 'blobs', 'cls_model.joblib')
+    dump(model_fit, joblib_path)
+    # Pedict targets
+    y_pred = model_fit.predict(X_test)
+    # Print scores
+    print_scores(y_test, y_pred)
+    return y_pred
+
+
+# ------------------------------------------------------------------------------
