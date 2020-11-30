@@ -143,3 +143,20 @@ class Prepare_X_Y():
         return y
 
 
+
+# ------------------------------------------------------------------------------
+# Full Pipeline Classification
+
+# Create scoring for models
+# Accuracy
+accuracy_score = make_scorer(accuracy_score, greater_is_better=True)
+# F1
+f1_score = make_scorer(f1_score, average='weighted', greater_is_better=True)
+
+# All scores together
+scoring = {
+    "acc": accuracy_score,
+    "f1": f1_score
+}
+
+
