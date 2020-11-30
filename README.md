@@ -20,17 +20,17 @@ You can set up virtual environment in one-step by using:
 ## File Structure
     .
     ├── blobs                   # store trained model
-    │   ├── __init__.py         
+    │   ├── __init__.py         # mark as package directory
     │   └── cls_model.joblib    # trained model in joblib format
     ├── data                    # store data
-    │   ├── __init__.py         
+    │   ├── __init__.py         # mark as package directory
     │   └── blogtext.csv.zip    # blogtext data zipped
     ├── train                   # module contains training script
-    │   ├── __init__.py        
+    │   ├── __init__.py         # mark as package directory
     │   └── train_model.py      # script load data, preprocess & train model
     ├── run.py                  # run train_model.py
     ├── bloggers.ipynb          # summary in jupyter notebook format
-    └── README.md
+    └── README.md               # project summary, instructions
 
 
 ## Train Model
