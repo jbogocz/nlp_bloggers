@@ -149,14 +149,14 @@ class Prepare_X_Y():
 
 # Create scoring for models
 # Accuracy
-accuracy_score = make_scorer(accuracy_score, greater_is_better=True)
+accuracy_sc = make_scorer(accuracy_score, greater_is_better=True)
 # F1
-f1_score = make_scorer(f1_score, average='weighted', greater_is_better=True)
+f1_sc = make_scorer(f1_score, average='weighted', greater_is_better=True)
 
 # All scores together
 scoring = {
-    "acc": accuracy_score,
-    "f1": f1_score
+    "acc": accuracy_sc,
+    "f1": f1_sc
 }
 
 
@@ -210,4 +210,17 @@ class ClassificationModel():
         # Print best parameters
         print(f'Best model parameters:\n{model_fit.best_params_}')
         return model_fit
+
+
+# ------------------------------------------------------------------------------
+
+
+def print_scores(y_test, y_pred):
+    print('Accuracy score: ', accuracy_score(y_test, y_pred))
+    print('F1 score: ', f1_score(y_test, y_pred, average='micro'))
+    print('Average precision score: ', average_precision_score(y_test, y_pred, average='micro'))
+    print('Average recall score: ', recall_score(y_test, y_pred, average='micro'))
+
+
+# ------------------------------------------------------------------------------
 
