@@ -49,3 +49,23 @@ def data_info(path):
 
     return df.iloc[:1000,:]
 
+# ------------------------------------------------------------------------------
+# Custom Transformers
+
+class RemoveNonalpha(BaseEstimator, TransformerMixin):
+    """Remove all non-alphabet characters from text
+    Attributes:
+        X (pd.Series): Column with text
+    Methods:
+        fit(X): Pass
+        transform (X): Remove all non-alphabet chars from X
+    """
+
+    def fit(self, X: pd.Series, y=None):
+        return self
+
+    def transform(self, X: pd.Series):
+        pattern = '[^a-z]+'
+        # Remove all non-alphabet chars from string
+        X = X.apply(lambda x: re.sub(pattern, ' ', x.lower().strip()))
+        return X
