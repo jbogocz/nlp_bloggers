@@ -160,3 +160,14 @@ scoring = {
 }
 
 
+pipeline = Pipeline([
+    ('remove', RemoveNonalpha()),
+    ('stopwords', StopWords()),
+    ('stem', Stemming()),
+    ('tfidf', TfidfVectorizer(ngram_range=(1, 2))),
+    ('scaler', 'passthrough'),
+    ('decomposer', 'passthrough'),
+    ('classifier', 'passthrough')
+])
+
+
