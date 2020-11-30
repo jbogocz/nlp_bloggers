@@ -113,3 +113,33 @@ class Stemming(BaseEstimator, TransformerMixin):
         return X
 
 
+# ------------------------------------------------------------------------------
+
+
+class Prepare_X_Y():
+    """Prepare X & Y from dataset
+    Attributes:
+        df (pd.DataFrame): with text, gender, age, sign columns
+    Methods:
+        get_X (df): Retrun X (text)
+        binarize_y (df): Convert gender, age, sign to the one array
+                         & encode multiple labels per instance
+    """
+
+    def __init__(self, df):
+        self.df = df
+
+    def get_X(self):
+        # Prepare X (text)
+        X = self.df['text']
+        return X
+
+    def binarize_y(self):
+        # Prepare y (labels) data
+        y = self.df.apply(
+            lambda x: [x['gender'], str(x['age']), x['sign']], axis=1)
+        binarizer = MultiLabelBinarizer()
+        y = binarizer.fit_transform(y)
+        return y
+
+
