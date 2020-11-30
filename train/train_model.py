@@ -32,3 +32,20 @@ from sklearn.metrics import (make_scorer, average_precision_score, f1_score,
 from joblib import dump
 
 # ------------------------------------------------------------------------------
+
+# Load blogger data
+def data_info(path):
+    """Load dataset and print basic info.
+    """
+    # Getting the Data
+    df = pd.read_csv(path, compression='zip')
+    print(f'File loaded successfully')
+
+    # Print No of rows & columns
+    print(f'No of rows: {df.shape[0]}\nNo of columns: {df.shape[1]}')
+
+    # Check the missing data
+    print(f'Missing cells: {df.isnull().sum().sum()}')
+
+    return df.iloc[:1000,:]
+
